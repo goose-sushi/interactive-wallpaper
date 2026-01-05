@@ -1,0 +1,280 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Arial', sans-serif;
+}
+
+.wallpaper-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.animal {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.animal-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.animal-head {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 50px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.animal-eyes {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 32px 0 0 white;
+}
+
+.animal-eyes::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 4px;
+    height: 4px;
+    background: black;
+    border-radius: 50%;
+    box-shadow: 32px 0 0 black;
+}
+
+.animal-mouth {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 10px;
+    background: white;
+    border-radius: 0 0 20px 20px;
+}
+
+.animal-body {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 70px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.animal-tail {
+    position: absolute;
+    bottom: 30px;
+    right: -20px;
+    width: 30px;
+    height: 15px;
+    background: #ff6b6b;
+    border-radius: 0 15px 15px 0;
+    transform-origin: left center;
+    animation: tail-wag 1s infinite alternate;
+}
+
+@keyframes tail-wag {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(30deg); }
+}
+
+.animal.jump {
+    animation: jump 0.5s ease;
+}
+
+.animal.look-left {
+    transform: translateX(-50%) scaleX(-1);
+}
+
+.animal.look-right {
+    transform: translateX(-50%) scaleX(1);
+}
+
+@keyframes jump {
+    0%, 100% { top: 20%; }
+    50% { top: 15%; }
+}
+
+.keyboard {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.key {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.key:hover {
+    background: #f0f0f0;
+}
+
+.key.active {
+    background: #4ecdc4;
+    color: white;
+    border-color: #45b7aa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: keyPress 0.2s ease;
+}
+
+@keyframes keyPress {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+}
+
+.key-wide {
+    width: 80px;
+}
+
+.key-wider {
+    width: 110px;
+}
+
+.key-space {
+    width: 400px;
+}
+
+.click-effect {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 3px solid white;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1000;
+}
+
+.click-effect.active {
+    animation: clickEffect 0.5s ease;
+}
+
+@keyframes clickEffect {
+    0% {
+        opacity: 1;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+.mouse-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+}
+
+.mouse-info.hidden {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .key {
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+    }
+    .key-wide {
+        width: 60px;
+    }
+    .key-wider {
+        width: 80px;
+    }
+    .key-space {
+        width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .keyboard {
+        padding: 15px;
+        gap: 5px;
+    }
+    .key {
+        width: 35px;
+        height: 35px;
+        font-size: 10px;
+    }
+    .key-wide {
+        width: 50px;
+    }
+    .key-wider {
+        width: 70px;
+    }
+    .key-space {
+        width: 250px;
+    }
+}

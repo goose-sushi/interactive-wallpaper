@@ -1,0 +1,16 @@
+{
+  "type": "web",
+  "uri": "index.html",
+  "name": "Interactive Animal Wallpaper",
+  "description": "Interactive wallpaper with animal and keyboard animation",
+  "author": "",
+  "version": "1.0.0",
+  "width": 1920,
+  "height": 1080,
+  "fps": 60,
+  "audio": false,
+  "userInput": true,
+  "background": true,
+  "alwaysOnTop": false,
+  "transparent": false
+}
