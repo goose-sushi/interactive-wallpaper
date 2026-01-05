@@ -6,7 +6,7 @@
 
 body {
     overflow: hidden;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     font-family: 'Arial', sans-serif;
 }
 
@@ -19,91 +19,326 @@ body {
     align-items: center;
 }
 
-.animal {
+/* 椅子 */
+.chair {
     position: absolute;
-    top: 20%;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
-    height: 100px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.animal-body {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.animal-head {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 50px;
-    background: #ff6b6b;
-    border-radius: 50%;
+    width: 200px;
+    height: 240px;
     z-index: 2;
 }
 
-.animal-eyes {
+.chair-back {
     position: absolute;
-    top: 15px;
-    left: 10px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 160px;
+    background: #654321;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 3px solid #4a3018;
+}
+
+.chair-seat {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 16px;
+    background: #654321;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 3px solid #4a3018;
+}
+
+.chair-leg {
+    position: absolute;
+    bottom: 0;
+    width: 12px;
+    height: 80px;
+    background: #654321;
+    border: 3px solid #4a3018;
+}
+
+.chair-leg-left {
+    left: 25px;
+}
+
+.chair-leg-right {
+    right: 25px;
+}
+
+/* 桌子 */
+.table {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 18px;
+    background: #8b4513;
+    border-radius: 5px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+/* 鼠标垫 */
+.mouse-pad {
+    position: absolute;
+    bottom: 105px;
+    left: 50%;
+    transform: translateX(120px);
+    width: 160px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 鼠标 */
+.mouse {
+    width: 60px;
+    height: 30px;
+    background: #333;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 8px;
     width: 8px;
     height: 8px;
+    background: #555;
+    border-radius: 50%;
+}
+
+.animal {
+    position: absolute;
+    bottom: 140px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.6) rotateX(30deg) rotateY(-15deg);
+    width: 180px;
+    height: 180px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    z-index: 3;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* 三花猫头部 */
+.animal-head {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 110px;
     background: white;
     border-radius: 50%;
-    box-shadow: 32px 0 0 white;
+    z-index: 2;
+    box-shadow: 0 0 0 2px #333;
+}
+
+/* 三花猫头部花纹 */
+.animal-head::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 50px;
+    background: #8b4513;
+    border-radius: 50% 50% 0 0;
+}
+
+.animal-head::after {
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: 15px;
+    width: 25px;
+    height: 25px;
+    background: #8b4513;
+    border-radius: 50%;
+    box-shadow: 80px 0 0 #8b4513;
+}
+
+/* 三花猫眼睛 */
+.animal-eyes {
+    position: absolute;
+    top: 50px;
+    left: 30px;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 60px 0 0 white;
+    border: 2px solid #333;
 }
 
 .animal-eyes::after {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 4px;
-    height: 4px;
-    background: black;
+    top: 5px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    background: #ff69b4;
     border-radius: 50%;
-    box-shadow: 32px 0 0 black;
+    box-shadow: 60px 0 0 #ff69b4;
 }
 
+/* 三花猫鼻子 */
 .animal-mouth {
     position: absolute;
-    bottom: 10px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    width: 20px;
-    height: 10px;
-    background: white;
-    border-radius: 0 0 20px 20px;
+    width: 10px;
+    height: 7px;
+    background: #ff69b4;
+    border-radius: 50%;
 }
 
+/* 三花猫胡须 */
+.animal-mouth::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -35px;
+    width: 35px;
+    height: 2px;
+    background: #333;
+    transform: rotate(15deg);
+}
+
+.animal-mouth::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: -35px;
+    width: 35px;
+    height: 2px;
+    background: #333;
+    transform: rotate(-15deg);
+    box-shadow: 70px 0 0 #333, 70px -7px 0 #333;
+}
+
+/* 三花猫身体 */
 .animal-body {
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 70px;
-    background: #ff6b6b;
+    width: 150px;
+    height: 120px;
+    background: white;
     border-radius: 50%;
     z-index: 1;
+    border: 2px solid #333;
 }
 
+/* 三花猫身体花纹 */
+.animal-body::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background: #8b4513;
+    border-radius: 50%;
+}
+
+.animal-body::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    background: #8b4513;
+    border-radius: 50%;
+    box-shadow: 75px 0 0 #8b4513;
+}
+
+/* 三花猫尾巴 */
 .animal-tail {
     position: absolute;
-    bottom: 30px;
-    right: -20px;
-    width: 30px;
-    height: 15px;
-    background: #ff6b6b;
-    border-radius: 0 15px 15px 0;
+    bottom: 40px;
+    right: -35px;
+    width: 100px;
+    height: 18px;
+    background: linear-gradient(90deg, #8b4513 0%, #8b4513 30%, white 30%, white 70%, #8b4513 70%);
+    border-radius: 18px;
     transform-origin: left center;
     animation: tail-wag 1s infinite alternate;
+    border: 2px solid #333;
+}
+
+.animal-hand {
+    position: absolute;
+    width: 35px;
+    height: 25px;
+    background: white;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    z-index: 3;
+    transition: all 0.5s ease;
+    border: 2px solid #333;
+}
+
+.animal-hand::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 7px;
+    width: 8px;
+    height: 8px;
+    background: #8b4513;
+    border-radius: 50%;
+    box-shadow: 12px 0 0 #8b4513, 6px -5px 0 #8b4513;
+}
+
+.animal-hand-left {
+    top: 100px;
+    left: 15px;
+    transform: rotate(-15deg) translateY(0px);
+}
+
+.animal-hand-right {
+    top: 100px;
+    right: 20px;
+    transform: rotate(25deg) translateY(0px);
+}
+
+.animal .hand-pressing {
+    animation: hand-press 0.2s ease;
+}
+
+.animal .hand-pressing .animal-hand-right {
+    transform: scale(0.9) translateY(5px);
+}
+
+@keyframes hand-press {
+    0% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+    100% { transform: translateX(-50%) translateY(0); }
 }
 
 @keyframes tail-wag {
@@ -130,72 +365,134 @@ body {
 
 .keyboard {
     position: absolute;
-    bottom: 10%;
+    bottom: 105px;
     left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateX(-50%) scaleX(-1) rotateZ(180deg) rotateX(-20deg);
+    background: rgba(240, 240, 240, 0.95);
+    padding: 3px;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    max-width: 900px;
+    gap: 1px;
+    max-width: 180px;
     width: 100%;
+    z-index: 2;
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 .keyboard-row {
     display: flex;
     justify-content: center;
-    gap: 8px;
+    gap: 1px;
 }
 
 .key {
-    width: 50px;
-    height: 50px;
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    width: 10px;
+    height: 10px;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 3px;
     font-weight: bold;
     color: #333;
     cursor: pointer;
     transition: all 0.1s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
+/* 彩虹色键盘 */
+.keyboard-row:nth-child(1) .key:nth-child(odd) { background: #ff9a9a; border-color: #ff7a7a; }
+.keyboard-row:nth-child(1) .key:nth-child(even) { background: #ffb380; border-color: #ff9333; }
+.keyboard-row:nth-child(2) .key:nth-child(odd) { background: #ffe066; border-color: #ffd233; }
+.keyboard-row:nth-child(2) .key:nth-child(even) { background: #66d9ef; border-color: #33c5e5; }
+.keyboard-row:nth-child(3) .key:nth-child(odd) { background: #66e5b3; border-color: #33d593; }
+.keyboard-row:nth-child(3) .key:nth-child(even) { background: #80b3ff; border-color: #3393ff; }
+.keyboard-row:nth-child(4) .key:nth-child(odd) { background: #9966ff; border-color: #7a33ff; }
+.keyboard-row:nth-child(4) .key:nth-child(even) { background: #ffb3e6; border-color: #ff66cc; }
+
 .key:hover {
-    background: #f0f0f0;
+    opacity: 0.9;
 }
 
 .key.active {
-    background: #4ecdc4;
-    color: white;
-    border-color: #45b7aa;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(3px);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
     animation: keyPress 0.2s ease;
+}
+
+.key.pressed {
+    transform: translateY(4px) scale(0.95);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 @keyframes keyPress {
     0% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
+    50% { transform: translateY(5px); }
     100% { transform: translateY(0); }
 }
 
+/* 水滴灯效 */
+.water-drop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
+    z-index: 5;
+    animation: waterDrop 0.6s ease-out forwards;
+}
+
+@keyframes waterDrop {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    30% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* 扩散到周围键位的效果 */
+.key.drip-effect {
+    animation: dripToNeighbor 0.8s ease-out forwards;
+}
+
+@keyframes dripToNeighbor {
+    0% {
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
 .key-wide {
-    width: 80px;
+    width: 16px;
 }
 
 .key-wider {
-    width: 110px;
+    width: 22px;
 }
 
 .key-space {
-    width: 400px;
+    width: 60px;
 }
 
 .click-effect {
@@ -239,42 +536,4 @@ body {
 
 .mouse-info.hidden {
     display: none;
-}
-
-@media (max-width: 1024px) {
-    .key {
-        width: 40px;
-        height: 40px;
-        font-size: 12px;
-    }
-    .key-wide {
-        width: 60px;
-    }
-    .key-wider {
-        width: 80px;
-    }
-    .key-space {
-        width: 300px;
-    }
-}
-
-@media (max-width: 768px) {
-    .keyboard {
-        padding: 15px;
-        gap: 5px;
-    }
-    .key {
-        width: 35px;
-        height: 35px;
-        font-size: 10px;
-    }
-    .key-wide {
-        width: 50px;
-    }
-    .key-wider {
-        width: 70px;
-    }
-    .key-space {
-        width: 250px;
-    }
 }

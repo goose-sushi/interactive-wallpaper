@@ -19,12 +19,7 @@ function init() {
 
 function handleMouseDown(e) {
     showClickEffect(e.clientX, e.clientY);
-    animal.classList.add('jump');
-    setTimeout(() => {
-        animal.classList.remove('jump');
-    }, 500);
     updateMouseInfo(e);
-    moveAnimalTo(e.clientX, e.clientY);
 }
 
 function showClickEffect(x, y) {
@@ -40,36 +35,55 @@ function handleMouseMove(e) {
     mouseX = e.clientX;
     mouseY = e.clientY;
     updateMouseInfo(e);
-    lookAtMouse(e.clientX);
-}
-
-function lookAtMouse(x) {
-    const animalRect = animal.getBoundingClientRect();
-    const animalCenterX = animalRect.left + animalRect.width / 2;
-    if (x < animalCenterX) {
-        animal.classList.add('look-left');
-        animal.classList.remove('look-right');
-    } else {
-        animal.classList.add('look-right');
-        animal.classList.remove('look-left');
-    }
 }
 
 function moveAnimalTo(x, y) {
-    const maxX = window.innerWidth - 100;
-    const maxY = window.innerHeight - 100;
-    const newX = Math.max(50, Math.min(x - 50, maxX));
-    const newY = Math.max(50, Math.min(y - 50, maxY));
-    animal.style.left = `${newX}px`;
-    animal.style.top = `${newY}px`;
+    // 不移动动物，保持固定位置
 }
 
 function handleKeyDown(e) {
     const keyElement = document.querySelector(`[data-key="${e.code}"]`);
     if (keyElement) {
         keyElement.classList.add('active');
-        animalReactionToKey(e.code);
+        showWaterDropEffect(keyElement);
+        animalPressKey(e.code, keyElement);
     }
+}
+
+function showWaterDropEffect(keyElement) {
+    // 创建水滴效果
+    const waterDrop = document.createElement('div');
+    waterDrop.className = 'water-drop';
+    keyElement.appendChild(waterDrop);
+    
+    // 移除水滴效果
+    setTimeout(() => {
+        waterDrop.remove();
+    }, 600);
+    
+    // 扩散到周围键位
+    const keyRect = keyElement.getBoundingClientRect();
+    const keys = document.querySelectorAll('.key');
+    
+    keys.forEach(key => {
+        if (key === keyElement) return;
+        
+        const rect = key.getBoundingClientRect();
+        const distance = Math.sqrt(
+            Math.pow(rect.left - keyRect.left, 2) + 
+            Math.pow(rect.top - keyRect.top, 2)
+        );
+        
+        // 只影响距离在100px内的键位
+        if (distance < 100) {
+            setTimeout(() => {
+                key.classList.add('drip-effect');
+                setTimeout(() => {
+                    key.classList.remove('drip-effect');
+                }, 800);
+            }, distance * 1.5); // 根据距离设置延迟，模拟扩散效果
+        }
+    });
 }
 
 function handleKeyUp(e) {
@@ -79,52 +93,53 @@ function handleKeyUp(e) {
     }
 }
 
-function animalReactionToKey(keyCode) {
-    switch(keyCode) {
-        case 'Space':
-            animal.classList.add('jump');
-            setTimeout(() => {
-                animal.classList.remove('jump');
-            }, 500);
-            break;
-        case 'ArrowLeft':
-            moveAnimalBy(-50, 0);
-            break;
-        case 'ArrowRight':
-            moveAnimalBy(50, 0);
-            break;
-        case 'ArrowUp':
-            moveAnimalBy(0, -50);
-            break;
-        case 'ArrowDown':
-            moveAnimalBy(0, 50);
-            break;
-        default:
-            animal.style.transform += ' scale(1.1)';
-            setTimeout(() => {
-                animal.style.transform = animal.style.transform.replace(' scale(1.1)', '');
-            }, 100);
-            break;
-    }
+function animalPressKey(keyCode, keyElement) {
+    // 获取被按下的键位的位置
+    const keyRect = keyElement.getBoundingClientRect();
+    const keyCenterX = keyRect.left + keyRect.width / 2;
+    const keyCenterY = keyRect.top + keyRect.height / 2;
+    
+    // 获取动物的位置
+    const animalRect = animal.getBoundingClientRect();
+    
+    // 计算手需要移动的距离
+    const hand = document.querySelector('.animal-hand-right');
+    const handRect = hand.getBoundingClientRect();
+    const handCenterX = handRect.left + handRect.width / 2;
+    const handCenterY = handRect.top + handRect.height / 2;
+    
+    // 计算手的移动距离（相对动物）
+    const handMoveX = keyCenterX - handCenterX;
+    const handMoveY = keyCenterY - handCenterY;
+    
+    // 计算手的角度，使其指向按键
+    const angle = Math.atan2(handMoveY, handMoveX) * 180 / Math.PI;
+    
+    // 设置手的移动和旋转，添加过渡效果
+    hand.style.transition = 'all 0.15s ease-out';
+    hand.style.transform = `translateX(${handMoveX}px) translateY(${handMoveY}px) rotate(${angle + 90}deg)`;
+    
+    // 添加手按压动画
+    animal.classList.add('hand-pressing');
+    
+    // 按键被按下时的效果
+    keyElement.classList.add('pressed');
+    
+    // 移除按压动画并恢复手的位置
+    setTimeout(() => {
+        animal.classList.remove('hand-pressing');
+        hand.style.transition = 'all 0.3s ease-in-out';
+        hand.style.transform = `rotate(25deg) translateY(10px)`;
+        keyElement.classList.remove('pressed');
+    }, 200);
 }
 
 function moveAnimalBy(deltaX, deltaY) {
-    const currentLeft = parseInt(animal.style.left) || window.innerWidth / 2 - 50;
-    const currentTop = parseInt(animal.style.top) || window.innerHeight * 0.2;
-    const newLeft = Math.max(50, Math.min(currentLeft + deltaX, window.innerWidth - 150));
-    const newTop = Math.max(50, Math.min(currentTop + deltaY, window.innerHeight - 150));
-    animal.style.left = `${newLeft}px`;
-    animal.style.top = `${newTop}px`;
+    // 不移动动物，保持固定位置
 }
 
 function animateAnimal() {
-    const time = Date.now() * 0.001;
-    const floatY = Math.sin(time) * 5;
-    animal.style.transform += ` translateY(${floatY}px)`;
-    setTimeout(() => {
-        animal.style.transform = animal.style.transform.replace(` translateY(${floatY}px)`, '');
-    }, 16);
-    requestAnimationFrame(animateAnimal);
+    // 不执行任何动画，保持动物固定
 }
 
 function updateMouseInfo(e) {
